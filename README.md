@@ -36,15 +36,56 @@ RoomEQWizard is a java application used for room acoustics analysis, loudspeaker
   ```
 
 ## Usage
-
-To run RoomEQWizard in a container:
+### CLI
 
 ```bash
 docker run -d \
   --name roomeqwizard \
   -p 4735:4735 \
-  jaoued/roomeqwizard
+  jaoued/roomeqwizard \
 ```
+if you need to list input-devices :
+
+```bash
+docker run -d \
+  --name roomeqwizard \
+  -p 4735:4735 \
+  --device /dev/snd:/dev/snd \
+  --group-add audio \
+  jaoued/roomeqwizard \
+```
+
+### docker compose
+create a docker-compose.yml file then  run 
+```bash
+docker compose up -d
+```
+docker-compose.yml
+```
+services:
+  roomeqwizard:
+    image: jaoued/roomeqwizard:latest
+    container_name: roomeqwizard
+    ports:
+      - "4735:4735"
+```
+
+if you need to list input-devices :
+```
+services:
+  roomeqwizard:
+    image: jaoued/roomeqwizard:latest
+    container_name: roomeqwizard
+    ports:
+      - "4735:4735"
+    devices:
+      - "/dev/snd:/dev/snd"
+    group_add:
+      - "audio"
+```
+
+### Note
+* you can change the port so the REW 4735 will be map elsewhere on your host
 
 ## Contributing
 
