@@ -2,7 +2,7 @@
 FROM eclipse-temurin:11-jre
 
 # Build arguments
-ARG REW_VERSION="5_40_beta_106"
+ARG REW_VERSION="5_40_beta_107"
 ARG INSTALL_DIR="/opt/rew"
 ARG TEMP_DIR="/tmp"
 
