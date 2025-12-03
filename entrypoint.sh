@@ -13,13 +13,14 @@ readonly REW_HOST="0.0.0.0"
 trap 'kill $(jobs -p)' EXIT
 
 # Function to start and verify Xvfb
-start_xvfb() {
+start_xvfb()
+{
   echo "Starting Xvfb..."
   Xvfb ${DISPLAY} -screen 0 ${SCREEN_RESOLUTION} -nolisten tcp &
 
   echo "Waiting for Xvfb to start..."
   for ((i = 1; i <= XVFB_RETRY_ATTEMPTS; i++)); do
-    if pgrep -f "Xvfb ${DISPLAY}" >/dev/null 2>&1; then
+    if xdpyinfo -display ${DISPLAY} > /dev/null 2>&1; then
       echo "Xvfb started successfully"
       return 0
     fi

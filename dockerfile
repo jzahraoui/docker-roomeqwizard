@@ -39,6 +39,7 @@ RUN set -ex && \
     curl \
     ca-certificates \
     xvfb \
+    x11-utils \
     libasound2 && \
     # Download and install REW
     curl \
