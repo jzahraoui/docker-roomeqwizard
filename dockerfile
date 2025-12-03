@@ -1,8 +1,8 @@
 # Use a specific version tag instead of latest for better reproducibility
-FROM azul/zulu-openjdk:8u432-jre
+FROM eclipse-temurin:11-jre
 
 # Build arguments
-ARG REW_VERSION="5_40_beta_105"
+ARG REW_VERSION="5_40_beta_106"
 ARG INSTALL_DIR="/opt/rew"
 ARG TEMP_DIR="/tmp"
 
@@ -40,7 +40,7 @@ RUN set -ex && \
     ca-certificates \
     xvfb \
     x11-utils \
-    libasound2 && \
+    libasound2t64 && \
     # Download and install REW
     curl \
     --fail \

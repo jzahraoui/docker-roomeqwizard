@@ -16,7 +16,7 @@ trap 'kill $(jobs -p) 2>/dev/null || true' EXIT
 start_xvfb()
 {
   echo "Starting Xvfb..."
-  Xvfb ${DISPLAY} -screen 0 ${SCREEN_RESOLUTION} -nolisten tcp &
+  Xvfb ${DISPLAY} -screen 0 ${SCREEN_RESOLUTION} -nolisten tcp 2>/dev/null &
 
   echo "Waiting for Xvfb to start..."
   i=1
