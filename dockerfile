@@ -39,6 +39,7 @@ RUN set -ex && \
     curl \
     ca-certificates \
     xvfb \
+    x11-utils \
     libasound2 && \
     # Download and install REW
     curl \
@@ -68,8 +69,8 @@ RUN set -ex && \
 USER rew
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD xdpyinfo -display :99 >/dev/null && pgrep -f roomeqwizard >/dev/null
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl --fail http://localhost:4735/ || exit 1
 
 # Expose port
 EXPOSE 4735
