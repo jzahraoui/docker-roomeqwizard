@@ -2,7 +2,7 @@
 FROM azul/zulu-openjdk:8u432-jre
 
 # Build arguments
-ARG REW_VERSION="5_40_beta_104"
+ARG REW_VERSION="5_40_beta_105"
 ARG INSTALL_DIR="/opt/rew"
 ARG TEMP_DIR="/tmp"
 
