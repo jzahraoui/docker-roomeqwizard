@@ -1,5 +1,5 @@
 # Use a specific version tag instead of latest for better reproducibility
-FROM eclipse-temurin:11-jre
+FROM eclipse-temurin:25-jre
 
 # Build arguments
 ARG REW_VERSION="5_40_beta_109"
