@@ -97,8 +97,8 @@ jobs:
           labels: ${{ needs.metadata.outputs.docker_labels }}
           load: true
           tags: ${{ env.DOCKER_IMAGE_NAME }}:test-${{ matrix.arch }}
-          cache-from: type=gha,scope=build-${{ matrix.arch }}
-          cache-to: type=gha,mode=max,scope=build-${{ matrix.arch }}
+          cache-from: type=gha,scope=${{ github.event_name == 'pull_request' && format('pr-{0}-{1}', github.event.pull_request.number, matrix.arch) || format('trusted-{0}', matrix.arch) }}
+          cache-to: type=gha,mode=max,scope=${{ github.event_name == 'pull_request' && format('pr-{0}-{1}', github.event.pull_request.number, matrix.arch) || format('trusted-{0}', matrix.arch) }}
 
       - name: Test image
         run: |
@@ -180,7 +180,7 @@ jobs:
             REW_VERSION=${{ needs.metadata.outputs.rew_version }}
           labels: ${{ needs.metadata.outputs.docker_labels }}
           outputs: type=image,name=${{ env.DOCKER_IMAGE_NAME }},push-by-digest=true,name-canonical=true,push=true
-          cache-from: type=gha,scope=build-${{ matrix.arch }}
+          cache-from: type=gha,scope=trusted-${{ matrix.arch }}
 
       - name: Export digest
         run: |
