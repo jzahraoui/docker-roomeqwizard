@@ -36,11 +36,11 @@ RUN set -ex && \
     # Update and install dependencies
     apt-get -yq update && \
     apt-get -yqq install --no-install-recommends \
-    curl \
     ca-certificates \
-    xvfb \
+    curl \
+    libasound2t64 \
     x11-utils \
-    libasound2t64 && \
+    xvfb && \
     # Download and install REW
     curl \
     --fail \
