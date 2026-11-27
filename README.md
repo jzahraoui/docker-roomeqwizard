@@ -145,7 +145,7 @@ The Dockerfile supports a build argument for the REW version:
 
 ```bash
 docker build \
-  --build-arg REW_VERSION=5_40_beta_119 \
+  --build-arg REW_VERSION=5_40_beta_152 \
   -t roomeqwizard .
 ```
 

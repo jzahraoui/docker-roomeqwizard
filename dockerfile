@@ -1,8 +1,8 @@
 # Use a specific version tag instead of latest for better reproducibility
-FROM eclipse-temurin:11-jre
+FROM eclipse-temurin:17-jre
 
 # Build arguments
-ARG REW_VERSION="5_40_beta_131"
+ARG REW_VERSION="5_40_beta_152"
 ARG INSTALL_DIR="/opt/rew"
 ARG TEMP_DIR="/tmp"
 
@@ -53,7 +53,10 @@ RUN set -ex && \
     "https://roomeqwizard.com/installers/${INSTALLER_FILE}" && \
     # Make installer executable and run
     chmod +x "${TEMP_DIR}/installer.sh" entrypoint.sh && \
-    "${TEMP_DIR}/installer.sh" -q -dir "${INSTALL_DIR}" && \
+    # DISPLAY must be unset here: no X server runs at build time, and the
+    # installer would fail on it while still exiting 0
+    env -u DISPLAY "${TEMP_DIR}/installer.sh" -q -dir "${INSTALL_DIR}" && \
+    test -x "${INSTALL_DIR}/roomeqwizard" && \
     echo "-Djava.util.logging.config.file=${INSTALL_DIR}/logging.properties" >> roomeqwizard.vmoptions && \
     echo "-Drew.preferences.file=${INSTALL_DIR}/preferences.txt" >> roomeqwizard.vmoptions && \
     # Cleanup
